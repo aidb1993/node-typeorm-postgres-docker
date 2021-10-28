@@ -55,13 +55,9 @@ class ExampleService {
         return result;
     }
 
-    updateOneById(_id, data = {}, options = {}) {
-        options = {
-            ...options,
-            ...{ lean: true, new: true },
-        };
-        const updated = this.exampleModel.findOneAndUpdate(_id, data, options);
-        return updated.exec();
+    async updateOneById(_id, data , options = {}) {
+        const updated = await this.userRepository.update({id: _id}, data)
+        return updated;
     }
 
     replaceOneById(_id, data = {}, options = {}) {
